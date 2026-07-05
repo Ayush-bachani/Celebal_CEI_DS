@@ -1,0 +1,45 @@
+Renewable Energy: An Overview
+
+Renewable energy comes from natural sources that replenish themselves faster
+than they are consumed. Unlike fossil fuels, which take millions of years to
+form and release carbon dioxide when burned, renewable sources produce little
+to no greenhouse gas emissions during operation. The main types of renewable
+energy are solar, wind, hydroelectric, geothermal, and biomass.
+
+Solar Energy
+Solar power captures energy from sunlight using photovoltaic (PV) panels or
+concentrated solar power systems. Photovoltaic panels convert light directly
+into electricity using semiconductor materials, usually silicon. Solar energy
+is abundant and increasingly cheap, but it is intermittent: it only generates
+power when the sun is shining, which makes energy storage important.
+
+Wind Energy
+Wind turbines convert the kinetic energy of moving air into electricity. Large
+turbines are often grouped together in wind farms, either onshore or offshore.
+Offshore wind is stronger and more consistent, but building and maintaining
+turbines at sea is more expensive. Wind is also intermittent and depends on
+weather conditions.
+
+Hydroelectric Power
+Hydroelectric power generates electricity from flowing or falling water,
+usually by releasing water from a dam through turbines. It is one of the oldest
+and most reliable renewable sources and can be adjusted quickly to meet demand.
+However, large dams can disrupt ecosystems and displace communities.
+
+Geothermal Energy
+Geothermal energy taps heat from beneath the Earth's surface. This heat can be
+used directly for heating buildings or to produce steam that drives turbines.
+Geothermal is highly reliable and available around the clock, but it is limited
+to regions with accessible underground heat, such as volcanic areas.
+
+Biomass Energy
+Biomass energy is produced from organic materials such as wood, crop residues,
+and animal waste. These materials can be burned directly or converted into
+biofuels. Biomass is considered renewable because plants can be regrown, but
+burning it still releases carbon and can contribute to air pollution.
+
+The Future of Renewable Energy
+The transition to renewable energy is central to reducing climate change. Key
+challenges include energy storage, upgrading electrical grids, and lowering
+costs further. Battery technology, smart grids, and government policies all
+play a major role in accelerating adoption worldwide.
