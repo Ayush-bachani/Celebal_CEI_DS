@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MedQuery AI — Clinical Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="grid-bg" aria-hidden="true"></div>
+
+<div class="app">
+
+  <!-- ================= LEFT SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M10 3a1 1 0 0 0-1 1v5H4a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h5v5a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-5h5a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-5V4a1 1 0 0 0-1-1z"/></svg>
+      </span>
+      <div class="brand-text">
+        <div class="brand-name">MedQuery AI</div>
+        <div class="brand-sub">CLINICAL INTELLIGENCE</div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Primary">
+      <button class="nav-item" data-view="dashboard">
+        <svg viewBox="0 0 24 24" class="ico"><path fill="currentColor" d="M3 3h8v8H3zm10 0h8v5h-8zm0 7h8v11h-8zM3 13h8v8H3z"/></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="nav-item active" data-view="chat">
+        <svg viewBox="0 0 24 24" class="ico"><path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v2h2a1 1 0 1 1 0 2h-2v2a1 1 0 1 1-2 0V7H9a1 1 0 0 1 0-2h2V3a1 1 0 0 1 1-1M4 9h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1"/></svg>
+        <span>Query Assistant</span>
+      </button>
+      <button class="nav-item" data-view="history">
+        <svg viewBox="0 0 24 24" class="ico"><path fill="currentColor" d="M13 3a9 9 0 1 0 8.94 10H19.9A7 7 0 1 1 13 5v3l4-4l-4-4zm-1 5v5l4 2l.75-1.23L13.5 12V8z"/></svg>
+        <span>History</span>
+      </button>
+      <button class="nav-item" data-view="kb">
+        <svg viewBox="0 0 24 24" class="ico"><path fill="currentColor" d="M4 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a1 1 0 0 1-1.45.9L12 18.6l-6.55 2.3A1 1 0 0 1 4 20z"/></svg>
+        <span>Knowledge Base</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <button class="nav-item" data-view="settings">
+        <svg viewBox="0 0 24 24" class="ico"><path fill="currentColor" d="M12 8a4 4 0 1 0 0 8a4 4 0 0 0 0-8m8.94 4a7 7 0 0 0-.14-1.35l2.11-1.65l-2-3.46l-2.49 1a7 7 0 0 0-2.34-1.35L15.6 1h-4l-.38 2.84A7 7 0 0 0 8.88 5.2l-2.49-1l-2 3.46L6.5 9.3a7 7 0 0 0 0 2.7l-2.11 1.65l2 3.46l2.49-1a7 7 0 0 0 2.34 1.35L11.6 21h4l.38-2.84a7 7 0 0 0 2.34-1.35l2.49 1l2-3.46l-2.11-1.65A7 7 0 0 0 20.94 12"/></svg>
+        <span>Settings</span>
+      </button>
+
+      <div class="agent-status">
+        <div class="agent-status-head">
+          <span class="mono-label">AGENT STATUS</span>
+          <span class="pulse-dot" title="System ready"></span>
+        </div>
+        <ul class="agent-list">
+          <li data-agent="Orchestrator"><span class="agent-tick"></span>Orchestrator</li>
+          <li data-agent="RAG Agent"><span class="agent-tick"></span>RAG</li>
+          <li data-agent="SQL Agent"><span class="agent-tick"></span>SQL</li>
+          <li data-agent="Formatter"><span class="agent-tick"></span>Formatter</li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-btn only-mobile" id="menuBtn" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" class="ico"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+      </button>
+      <div class="crumbs">
+        <span class="mono-label dim">QUERY ASSISTANT</span>
+        <span class="crumb-sep">›</span>
+        <span class="crumb-now" id="crumbNow">New Session</span>
+      </div>
+      <div class="topbar-right">
+        <span class="powered mono-label dim">Powered by Groq + FAISS</span>
+        <button class="icon-btn" id="themeBtn" aria-label="Switch theme" title="Switch light / dark">
+          <svg class="ico ico-moon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.39 5.39 0 0 1 12 5.4c0-.83.18-1.62.5-2.33c-.16-.04-.33-.05-.5-.07"/></svg>
+          <svg class="ico ico-sun" viewBox="0 0 24 24"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10a5 5 0 0 0 0-10m0-5v3m0 14v3M4.2 4.2l2.1 2.1m11.4 11.4l2.1 2.1M2 12h3m14 0h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+        </button>
+        <button class="icon-btn only-mobile" id="ctxBtn" aria-label="Toggle context">
+          <svg viewBox="0 0 24 24" class="ico"><path fill="currentColor" d="M4 5h16v2H4zm0 6h10v2H4zm0 6h16v2H4z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ---- CHAT VIEW ---- -->
+    <section class="view" id="view-chat">
+      <div class="stream" id="stream">
+        <div class="empty" id="empty">
+          <div class="empty-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M10 3a1 1 0 0 0-1 1v5H4a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h5v5a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-5h5a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-5V4a1 1 0 0 0-1-1z"/></svg>
+          </div>
+          <h1>Ask a clinical question.</h1>
+          <p>Two agents, one box. I route patient-record questions to a read-only SQL agent and policy questions to a grounded RAG agent — and I refuse rather than guess.</p>
+          <div class="chips">
+            <div class="chip-group">
+              <span class="mono-label dim">PATIENT RECORDS · SQL</span>
+              <button class="chip" data-q="How many patients have diabetes?">How many patients have diabetes?</button>
+              <button class="chip" data-q="What is the average billing amount by insurance provider?">Average billing by insurance provider</button>
+              <button class="chip" data-q="How many emergency admissions are there?">Emergency admissions count</button>
+            </div>
+            <div class="chip-group">
+              <span class="mono-label dim">HOSPITAL POLICY · RAG</span>
+              <button class="chip" data-q="Is prior insurance approval required for surgery?">Prior approval for surgery?</button>
+              <button class="chip" data-q="What is the hospital discharge policy?">Discharge policy</button>
+              <button class="chip" data-q="How long do I have to dispute a bill?">Bill dispute window</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="composer-wrap">
+        <div class="composer">
+          <button class="icon-btn ghost" id="attachBtn" title="Attachments are not enabled in this demo" aria-label="Attach">
+            <svg viewBox="0 0 24 24" class="ico"><path fill="currentColor" d="m16.5 6l-6.9 6.9a2 2 0 0 0 2.8 2.8l6.9-6.9a4 4 0 0 0-5.6-5.6L6.5 10.4a6 6 0 0 0 8.5 8.5l6-6"/></svg>
+          </button>
+          <textarea id="input" rows="1" placeholder="Ask a clinical question…" autocomplete="off"></textarea>
+          <button class="send-btn" id="send" aria-label="Send">
+            <svg viewBox="0 0 24 24" class="ico"><path fill="currentColor" d="M3 20.5v-6l8-2.5l-8-2.5v-6l19 8.5z"/></svg>
+          </button>
+        </div>
+        <div class="composer-foot mono-label dim">
+          <span id="readyState">● QUERY ASSISTANT READY</span>
+          <span>MedQuery AI can make mistakes — verify important clinical information.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- DASHBOARD VIEW ---- -->
+    <section class="view hidden scrollable" id="view-dashboard">
+      <div class="page">
+        <h2 class="page-title">Dashboard</h2>
+        <p class="page-lede">A live snapshot of the data and knowledge base this assistant runs on.</p>
+        <div class="stat-grid" id="dashStats"><div class="loading">Loading…</div></div>
+        <h3 class="sub">Admissions by medical condition</h3>
+        <div class="bars" id="dashConditions"></div>
+      </div>
+    </section>
+
+    <!-- ---- HISTORY VIEW ---- -->
+    <section class="view hidden scrollable" id="view-history">
+      <div class="page">
+        <h2 class="page-title">History</h2>
+        <p class="page-lede">Every question this session, with the route it took and how it was answered.</p>
+        <div id="historyBody"><div class="empty-note">No questions yet this session. Ask something in the Query Assistant.</div></div>
+      </div>
+    </section>
+
+    <!-- ---- KNOWLEDGE BASE VIEW ---- -->
+    <section class="view hidden scrollable" id="view-kb">
+      <div class="page">
+        <h2 class="page-title">Knowledge Base</h2>
+        <p class="page-lede">The five policy documents the RAG agent is allowed to cite. It answers only from these — nothing else.</p>
+        <div id="kbBody"><div class="loading">Loading…</div></div>
+      </div>
+    </section>
+
+    <!-- ---- SETTINGS VIEW ---- -->
+    <section class="view hidden scrollable" id="view-settings">
+      <div class="page">
+        <h2 class="page-title">Settings</h2>
+        <p class="page-lede">Appearance and the models powering this assistant.</p>
+        <div class="setting-row">
+          <div>
+            <div class="setting-name">Theme</div>
+            <div class="setting-desc">Switch between the dark clinical view and a light one.</div>
+          </div>
+          <button class="btn" id="themeBtn2">Toggle light / dark</button>
+        </div>
+        <div class="setting-row" id="settingModel">
+          <div>
+            <div class="setting-name">Models</div>
+            <div class="setting-desc" id="settingModelDesc">Loading…</div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div>
+            <div class="setting-name">Anti-hallucination</div>
+            <div class="setting-desc">RAG answers require a retrieval score ≥ the similarity threshold, or the assistant refuses. SQL is read-only and shown with every answer.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= RIGHT CONTEXT PANEL ================= -->
+  <aside class="context" id="context">
+    <div class="context-head">
+      <span class="ctx-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M10 2a8 8 0 1 0 4.9 14.32l5.4 5.4l1.4-1.42l-5.4-5.4A8 8 0 0 0 10 2m0 2a6 6 0 1 1 0 12a6 6 0 0 1 0-12"/></svg>
+      </span>
+      <div>
+        <div class="ctx-title mono-label">CLINICAL CONTEXT</div>
+        <div class="ctx-sub">Analysis Engine</div>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="sources" role="tab">Sources</button>
+      <button class="tab" data-tab="trace" role="tab">Trace</button>
+      <button class="tab" data-tab="stats" role="tab">Stats</button>
+    </div>
+
+    <div class="tab-panels">
+      <div class="tab-panel active" id="tab-sources">
+        <div class="ctx-empty">Ask a question to see the evidence behind each answer — retrieved policy sources or the exact SQL that ran.</div>
+      </div>
+      <div class="tab-panel" id="tab-trace">
+        <div class="ctx-empty">The agent pipeline and per-stage timing will appear here after your first question.</div>
+      </div>
+      <div class="tab-panel" id="tab-stats">
+        <div class="ctx-empty">Loading…</div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="scrim" id="scrim"></div>
+</div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
